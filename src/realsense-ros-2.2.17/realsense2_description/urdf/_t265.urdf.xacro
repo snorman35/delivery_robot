@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+
+<!--
+License: Apache 2.0. See LICENSE file in root directory.
+Copyright(c) 2017 Intel Corporation. All Rights Reserved
+
+This is the URDF model for the Intel RealSense 430 camera, in its
+aluminum peripherial evaluation case.
+-->
+
+<robot name="sensor_t265" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- glass cover is 0.1 mm inwards from front aluminium plate -->
+  <xacro:property name="glass_to_front" value="0.1e-3"/>
+  <!-- see datasheet Revision 007, Fig. 4-4 page 65 -->
+  <xacro:property name="zero_depth_to_glass" value="4.2e-3"/>
+  <!--Create the 265 macro-->
+  <xacro:macro name="sensor_t265" params="parent *origin">
+
+    <xacro:property name="t265_width" value="0.10795" />
+    <xacro:property name="t265_depth" value="0.0127" />
+    <xacro:property name="t265_height" value="0.0254" />
+
+    <xacro:property name="fisheye1_offset_x" value="${0.0127 - t265_width/2}" />
+    <xacro:property name="fisheye2_offset_x" value="${t265_width/2 - (t265_width - 0.0762)}" />
+    <xacro:property name="pose_offset_x" value="${(fisheye1_offset_x+fisheye2_offset_x)/2}" />
+    <xacro:property name="sensor_offset_y" value="${t265_depth - glass_to_front - zero_depth_to_glass}" />
+
+    <link name="sensor_t265">
+      <visual>
+        <geometry>
+          <box size="${t265_width} ${t265_depth} ${t265_height}"/>
+        </geometry>
+        <material name="grey">
+          <color rgba="0.752941176 0.752941176 0.752941176 1.0"/>
+        </material>
+      </visual>
+    </link>
+    
+    <link name="fisheye1"/>
+    <link name="fisheye2"/>
+    <!--link name="imu"/-->
+    <link name="t265_pose"/>
+
+    <joint name="fisheye1_joint" type="fixed">
+      <parent link="sensor_t265"/>
+      <child link="fisheye1"/>
+      <origin xyz="${fisheye1_offset_x} ${sensor_offset_y} 0.0" rpy="${-pi/2} 0.0 0.0"/>
+    </joint>
+
+    <joint name="fisheye2_joint" type="fixed">
+      <parent link="sensor_t265"/>
+      <child link="fisheye2"/>
+      <origin xyz="${fisheye2_offset_x} ${sensor_offset_y} 0.0" rpy="${-pi/2} 0.0 0.0"/>
+    </joint>
+  
+    <joint name="pose_joint" type="fixed">
+      <parent link="sensor_t265"/>
+      <child link="t265_pose"/>
+      <origin xyz="${pose_offset_x} ${sensor_offset_y} 0.0" rpy="${pi/2} 0.0 0.0"/>
+    </joint>
+
+    <joint name="t265_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="sensor_t265"/>
+    </joint>
+  </xacro:macro>
+</robot>

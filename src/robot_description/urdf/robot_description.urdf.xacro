@@ -91,22 +91,10 @@
     <origin xyz="${offset_435_x} ${body_length/2 + d435_offset_y + mount_offset_435} ${body_height/2 - 0.0254}" rpy="0 0 ${pi/2}"/>
   </xacro:sensor_d435>
 
-  <!--Create the 265 macro-->
-  <xacro:macro name="sensor_t265" params="parent">
-    <link name="sensor_t265">
-      <visual>
-        <geometry>
-          <box size="0.10795 0.0127 0.0254"/>
-        </geometry>
-      </visual>
-    </link>
-    
-    <link name="fisheye_1"/>
-    <link name="fisheye_2"/>
-    <link name="imu"/>
-    <link name="t265_pose"/>
+  <xacro:include filename="$(find realsense2_description)/urdf/_t265.urdf.xacro"/>
 
-    
-  </xacro:macro>
+  <xacro:sensor_t265 parent="body">
+    <origin xyz="0.0 ${body_length/2 + 0.0508} 0.0" rpy="0.0 0.0 0.0"/>
+  </xacro:sensor_t265>
 
 </robot>
