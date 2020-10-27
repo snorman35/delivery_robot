@@ -21,7 +21,7 @@ rosdep update
 
 # install the ros packages needed
 sudo apt install ros-${ROS_DISTRO}-joy -y
-sudo apt install ros-${ROS_DISTRO}-ddynamic_reconfigure -y
+sudo apt install ros-${ROS_DISTRO}-ddynamic-reconfigure -y
 sudo apt install ros-${ROS_DISTRO}-rtabmap-ros -y
 
 # compile the workspace
