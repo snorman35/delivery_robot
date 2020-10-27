@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <robot name="robot_base" xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <xacro:include filename="$(find robot_controller)/urdf/mybot.gazebo"/>
+
   <xacro:property name="robot_width" value="0.57375" />
   <xacro:property name="robot_length" value="0.5032"/>
   <xacro:property name="robot_height" value="0.2238375"/>
@@ -17,10 +19,14 @@
     <link name="${prefix}_wheel_${number}">
       <inertial>
         <origin rpy="0.0 ${pi/2} 0.0"/>
-        <mass value="0.0"/>
-        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        <mass value="5"/>
+        <cylinder_inertia m="5" r="${wheel_radius}" h="${wheel_width}"/>
+        <inertia 
+            ixx="1.0" ixy="0.0" ixz="0.0" 
+            iyy="1.0" iyz="0.0" 
+            izz="1.0"/>
       </inertial>
-      <visual name="wheel">
+      <visual name="${prefix}_wheel_${number}_visual">
         <origin rpy="0.0 ${pi/2} 0.0"/>
         <geometry>
           <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
@@ -29,33 +35,45 @@
           <color rgba="0.0 0.0 1.0 1.0"/>
         </material>
       </visual>
+      <collision>
+        <origin rpy="0.0 ${pi/2} 0.0"/>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+      </collision>
     </link>
   </xacro:macro>
 
   <xacro:macro name="wheel_joint" params="prefix reflect number">
     <xacro:robot_wheel prefix="${prefix}" number="${number}"/>
-    <joint name="${prefix}_wheel_${number}_joint" type="fixed">
+    <joint name="${prefix}_wheel_${number}_joint" type="continuous">
       <parent link="body"/>
       <child link="${prefix}_wheel_${number}"/>
-      <!--axis xyz="0.0 1.0 0.0" rpy="0 0 0"/-->
+      <axis xyz="1.0 0.0 0.0" rpy="0 0 0"/>
       <origin xyz="${((robot_width/2) - (wheel_width/2))*reflect} ${(wheelbase/2 - wheel_radius)*(number-2)*-1} ${wheel_radius - (robot_height - body_height/2)}"/>
     </joint>
   </xacro:macro>
 
-  <link name="base_link">
-    <collision>
-      <geometry>
-        <box size="${robot_width} ${robot_length} ${robot_height}"/>
-      </geometry>
-    </collision>
-  </link>
+  <link name="base_link"/>
 
   <link name="body">
-    <visual>
+    <visual name="body_visual">
       <geometry>  
         <box size="${body_width} ${body_length} ${body_height}"/>
       </geometry>
     </visual>
+    <inertial>
+      <mass value="10.0"/>
+      <inertia 
+            ixx="0.5" ixy="0.0" ixz="0.0" 
+            iyy="1.0" iyz="0.0" 
+            izz="0.1"/>
+    </inertial>
+    <collision>
+      <geometry>  
+        <box size="${body_width} ${body_length} ${body_height}"/>
+      </geometry>
+    </collision>
   </link>
 
   <joint name="body_link" type="fixed">
