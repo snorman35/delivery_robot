@@ -35,10 +35,10 @@
   <xacro:macro name="wheel_joint" params="prefix reflect number">
     <xacro:robot_wheel prefix="${prefix}" number="${number}"/>
     <joint name="${prefix}_wheel_${number}_joint" type="fixed">
-      <parent link="base_link"/>
+      <parent link="body"/>
       <child link="${prefix}_wheel_${number}"/>
-      <!--axis xyz="0.0 1.0 0.0"/-->
-      <origin xyz="${((robot_width/2) - (wheel_width/2))*reflect} ${(wheelbase/2 - wheel_radius)*(number-2)*-1} ${wheel_radius}"/>
+      <!--axis xyz="0.0 1.0 0.0" rpy="0 0 0"/-->
+      <origin xyz="${((robot_width/2) - (wheel_width/2))*reflect} ${(wheelbase/2 - wheel_radius)*(number-2)*-1} ${wheel_radius - (robot_height - body_height/2)}"/>
     </joint>
   </xacro:macro>
 
