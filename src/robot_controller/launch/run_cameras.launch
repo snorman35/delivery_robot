@@ -1,0 +1,19 @@
+<launch>
+
+  <arg name="model" default="$(find robot_controller)/urdf/robot_description.urdf.xacro"/>
+  <arg name="gui" default="false" />  
+  
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <include file="$(find realsense2_camera)/launch/rs_d400_and_t265.launch">
+    <arg name="topic_odom_in"             default="odom_in"/>
+    <arg name="calib_odom_file"           default=""/>
+  </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="t265_node_to_model" args="0 0 0 0 0 0 /t265_pose_frame /t265_pose_link 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="model_to_d435_node" args="0 0 0 0 0 0 /camera_link /d400_link 100"/>
+
+</launch>
