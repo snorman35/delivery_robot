@@ -39,7 +39,7 @@ aluminum peripherial evaluation case.
     <link name="fisheye1"/>
     <link name="fisheye2"/>
     <!--link name="imu"/-->
-    <link name="t265_pose"/>
+    <link name="t265_pose_frame"/>
 
     <joint name="fisheye1_joint" type="fixed">
       <parent link="sensor_t265"/>
@@ -55,7 +55,7 @@ aluminum peripherial evaluation case.
   
     <joint name="pose_joint" type="fixed">
       <parent link="sensor_t265"/>
-      <child link="t265_pose"/>
+      <child link="t265_pose_frame"/>
       <origin xyz="${pose_offset_x} ${sensor_offset_y} 0.0" rpy="${pi/2} 0.0 0.0"/>
     </joint>
 
