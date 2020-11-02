@@ -14,7 +14,7 @@ aluminum peripherial evaluation case.
   <!-- see datasheet Revision 007, Fig. 4-4 page 65 -->
   <xacro:property name="zero_depth_to_glass" value="4.2e-3"/>
   <!--Create the 265 macro-->
-  <xacro:macro name="sensor_t265" params="parent *origin">
+  <xacro:macro name="sensor_t265" params="child *origin">
 
     <xacro:property name="t265_width" value="0.10795" />
     <xacro:property name="t265_depth" value="0.0127" />
@@ -23,7 +23,7 @@ aluminum peripherial evaluation case.
     <xacro:property name="fisheye1_offset_x" value="${0.0127 - t265_width/2}" />
     <xacro:property name="fisheye2_offset_x" value="${t265_width/2 - (t265_width - 0.0762)}" />
     <xacro:property name="pose_offset_x" value="${(fisheye1_offset_x+fisheye2_offset_x)/2}" />
-    <xacro:property name="sensor_offset_y" value="${t265_depth - glass_to_front - zero_depth_to_glass}" />
+    <xacro:property name="sensor_offset_y" value="${t265_depth/2 - glass_to_front - zero_depth_to_glass}" />
 
     <link name="sensor_t265">
       <visual>
@@ -39,7 +39,7 @@ aluminum peripherial evaluation case.
     <link name="fisheye1"/>
     <link name="fisheye2"/>
     <!--link name="imu"/-->
-    <link name="t265_pose_frame"/>
+    <link name="t265_pose"/>
 
     <joint name="fisheye1_joint" type="fixed">
       <parent link="sensor_t265"/>
@@ -54,15 +54,15 @@ aluminum peripherial evaluation case.
     </joint>
   
     <joint name="pose_joint" type="fixed">
-      <parent link="sensor_t265"/>
-      <child link="t265_pose_frame"/>
-      <origin xyz="${pose_offset_x} ${sensor_offset_y} 0.0" rpy="${pi/2} 0.0 0.0"/>
+      <parent link="t265_pose"/>
+      <child link="sensor_t265"/>
+      <origin xyz="${-pose_offset_x} 0.0 ${sensor_offset_y}" rpy="${-pi/2} 0.0 0.0"/>
     </joint>
 
     <joint name="t265_joint" type="fixed">
       <xacro:insert_block name="origin" />
-      <parent link="${parent}"/>
-      <child link="sensor_t265"/>
+      <parent link="sensor_t265"/>
+      <child link="${child}"/>
     </joint>
   </xacro:macro>
 </robot>

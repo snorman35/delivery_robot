@@ -77,9 +77,9 @@
   </link>
 
   <joint name="body_link" type="fixed">
-    <parent link="base_link"/>
-    <child link="body"/>
-    <origin xyz="0 0 ${robot_height - body_height/2}"/>
+    <parent link="body"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 ${-(robot_height - body_height/2)}"/>
   </joint>
 
   <!--Create all the wheels and define all the wheel joints-->
@@ -110,9 +110,12 @@
   </xacro:sensor_d435>
 
   <xacro:include filename="$(find realsense2_description)/urdf/_t265.urdf.xacro"/>
-
-  <xacro:sensor_t265 parent="body">
-    <origin xyz="0.0 ${body_length/2 + 0.0508} 0.0" rpy="0.0 0.0 0.0"/>
+  <xacro:property name="t265_width" value="0.10795" />
+  <xacro:property name="t265_depth" value="0.0127" />
+  <xacro:property name="t265_height" value="0.0254" />
+  
+  <xacro:sensor_t265 child="body">
+    <origin xyz="${body_width/2 - (t265_width/2 + 0.1571625)} ${-(body_length/2 + t265_depth/2 + 0.0238125)} 0.0" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_t265>
 
 </robot>
