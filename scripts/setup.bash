@@ -9,3 +9,5 @@ ${dir_path}/ros_dependencies.bash
 # compile the workspace
 catkin_make clean
 catkin_make
+# run a second time to resolve a missing dependency
+catkin_make
