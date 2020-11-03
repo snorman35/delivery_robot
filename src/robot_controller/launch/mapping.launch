@@ -5,6 +5,7 @@
       <remap from="camera_info" to="/d400/depth/camera_info"/>
       <remap from="scan"        to="/depthscan"/> <!--topic output-->
       <param name="scan_time" type="double" value="0.04"/>
+      <param name="output_frame_id" value="d400_depth_frame"/>
       <param name="range_max" type="double" value="7"/>
     </node>
 
