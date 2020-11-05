@@ -7,4 +7,5 @@
     <arg name="calib_odom_file"           default="$(arg calib_odom_file)"/>
   </include>
 
+  <include file="$(find roboclaw)/launch/diffdrive.launch"/>
 </launch>
