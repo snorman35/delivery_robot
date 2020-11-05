@@ -3,8 +3,8 @@
   <arg name="calib_odom_file"           default="$(find robot_controller)/urdf/t265_calib.json"/>
 
   <include file="$(find robot_controller)/launch/run_cameras.launch">
-    <arg name="topic_odom_in"             default="${topic_odom_in}"/>
-    <arg name="calib_odom_file"           default="${calib_odom_file}"/>
+    <arg name="topic_odom_in"             default="$(arg topic_odom_in)"/>
+    <arg name="calib_odom_file"           default="$(arg calib_odom_file)"/>
   </include>
 
 </launch>
