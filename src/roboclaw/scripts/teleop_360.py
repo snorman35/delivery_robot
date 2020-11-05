@@ -6,7 +6,7 @@ class Node():
     def __init__(self):
         rospy.init_node("teleop_360", anonymous=True)
         rospy.Subscriber("joy", Joy, self.callback)
-        self.pub_node = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
+        self.pub_node = rospy.Publisher("/roboclaw/cmd_vel", Twist, queue_size=10)
         self.rate = rospy.Rate(10)
 
 
