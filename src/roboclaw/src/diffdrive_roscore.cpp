@@ -112,7 +112,7 @@ namespace roboclaw {
 
     void diffdrive_roscore::encoder_callback(const roboclaw::RoboclawEncoderSteps &msg) {
 
-        static tf::TransformBroadcaster br;
+        //static tf::TransformBroadcaster br;
 
         int delta_1 = msg.mot1_enc_steps - last_steps_1;
         int delta_2 = msg.mot2_enc_steps - last_steps_2;
@@ -175,10 +175,10 @@ namespace roboclaw {
         // Theta_z Variance
         odom.pose.covariance[35] = var_theta_z;
 
-        tf::Transform transform;
-        transform.setOrigin(tf::Vector3(last_x, last_y, 0.0));
-        transform.setRotation(tf::createQuaternionFromRPY(0.0, 0.0, cur_theta));
-        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link"));
+        //tf::Transform transform;
+        //transform.setOrigin(tf::Vector3(last_x, last_y, 0.0));
+        //transform.setRotation(tf::createQuaternionFromRPY(0.0, 0.0, cur_theta));
+        //br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link"));
 
         odom_pub.publish(odom);
 
