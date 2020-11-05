@@ -1,5 +1,7 @@
 <launch>
-
+  <arg name="topic_odom_in"             default="odom_in"/>
+  <arg name="calib_odom_file"           default=""/>
+  
   <arg name="model" default="$(find robot_controller)/urdf/robot_description.urdf.xacro"/>
   <arg name="gui" default="false" />  
   
@@ -9,8 +11,8 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
   <include file="$(find realsense2_camera)/launch/rs_d400_and_t265.launch">
-    <arg name="topic_odom_in"             default="odom_in"/>
-    <arg name="calib_odom_file"           default=""/>
+    <arg name="topic_odom_in"             value="${topic_odom_in}"/>
+    <arg name="calib_odom_file"           value="${calib_odom_file}"/>
   </include>
 
   <node pkg="tf" type="static_transform_publisher" name="t265_node_to_model" args="0 0 0 0 0 0 /t265_pose_frame /t265_pose_link 100"/>

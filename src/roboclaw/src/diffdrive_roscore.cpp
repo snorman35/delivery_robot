@@ -38,11 +38,11 @@ namespace roboclaw {
         this->nh = nh;
         this->nh_private = nh_private;
 
-        odom_pub = nh.advertise<nav_msgs::Odometry>(std::string("odom"), 10);
-        motor_pub = nh.advertise<roboclaw::RoboclawMotorVelocity>(std::string("motor_cmd_vel"), 10);
+        odom_pub = nh.advertise<nav_msgs::Odometry>(std::string("roboclaw/odom"), 10);
+        motor_pub = nh.advertise<roboclaw::RoboclawMotorVelocity>(std::string("roboclaw/motor_cmd_vel"), 10);
 
-        encoder_sub = nh.subscribe(std::string("motor_enc"), 10, &diffdrive_roscore::encoder_callback, this);
-        twist_sub = nh.subscribe(std::string("cmd_vel"), 10, &diffdrive_roscore::twist_callback, this);
+        encoder_sub = nh.subscribe(std::string("roboclaw/motor_enc"), 10, &diffdrive_roscore::encoder_callback, this);
+        twist_sub = nh.subscribe(std::string("roboclaw/cmd_vel"), 10, &diffdrive_roscore::twist_callback, this);
 
         last_theta = 0.0;
         last_steps_1 = 0;

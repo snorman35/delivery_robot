@@ -55,6 +55,7 @@
   </xacro:macro>
 
   <link name="base_link"/>
+  <link name="wheel_odom_link"/>
 
   <link name="body">
     <visual name="body_visual">
@@ -76,12 +77,18 @@
     </collision>
   </link>
 
-  <joint name="body_link" type="fixed">
+  <joint name="body_joint" type="fixed">
     <parent link="body"/>
     <child link="base_link"/>
     <origin xyz="0 0 ${-(robot_height - body_height/2)}"/>
   </joint>
 
+  <joint name="wheel_odom_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="wheel_odom_link"/>
+    <origin xyz="0.0 0.0 ${wheel_radius}" rpy="0.0 0.0 ${pi/2}"/>
+  </joint>
+  
   <!--Create all the wheels and define all the wheel joints-->
   <xacro:wheel_joint prefix="left" reflect="-1" number="1"/>
   <xacro:wheel_joint prefix="left" reflect="-1" number="2"/>
@@ -116,7 +123,7 @@
   <xacro:property name="t265_height" value="0.0254" />
   
   <xacro:sensor_t265 child="body">
-    <origin xyz="${body_width/2 - (t265_width/2 + 0.1571625)} ${-(body_length/2 + t265_depth/2 + 0.0238125)} 0.0" rpy="0.0 0.0 0.0"/>
+    <origin xyz="${body_width/2 - (t265_width/2 + 0.1571625)} ${-(body_length/2 + t265_depth/2 + 0.0238125)} ${-body_height/2 + t265_height/2 + 0.0301625}" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_t265>
 
 </robot>

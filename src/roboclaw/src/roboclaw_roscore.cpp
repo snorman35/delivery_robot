@@ -66,8 +66,8 @@ namespace roboclaw {
         for (int r = 0; r < roboclaw_mapping.size(); r++)
             roboclaw->reset_encoders(roboclaw_mapping[r]);
 
-        encoder_pub = nh.advertise<roboclaw::RoboclawEncoderSteps>(std::string("motor_enc"), 10);
-        velocity_sub = nh.subscribe(std::string("motor_cmd_vel"), 10, &roboclaw_roscore::velocity_callback, this);
+        encoder_pub = nh.advertise<roboclaw::RoboclawEncoderSteps>(std::string("roboclaw/motor_enc"), 10);
+        velocity_sub = nh.subscribe(std::string("roboclaw/motor_cmd_vel"), 10, &roboclaw_roscore::velocity_callback, this);
 
     }
 
