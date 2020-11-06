@@ -14,8 +14,8 @@ class Node():
 
     def callback(self, data):
         # 2, 5
-        lt = (data.axes[2] - 1) / 12
-        rt = (data.axes[5] - 1) / -12
+        lt = (data.axes[2] - 1) / 3
+        rt = (data.axes[5] - 1) / -3
         linvel = 0
         # xor the inputs so only one trigger can be used
         if bool(lt) != bool(rt):
