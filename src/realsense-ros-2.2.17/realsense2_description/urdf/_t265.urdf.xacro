@@ -20,15 +20,15 @@ aluminum peripherial evaluation case.
     <xacro:property name="t265_depth" value="0.0127" />
     <xacro:property name="t265_height" value="0.0254" />
 
-    <xacro:property name="fisheye1_offset_x" value="${0.0127 - t265_width/2}" />
-    <xacro:property name="fisheye2_offset_x" value="${t265_width/2 - (t265_width - 0.0762)}" />
-    <xacro:property name="pose_offset_x" value="${(fisheye1_offset_x+fisheye2_offset_x)/2}" />
-    <xacro:property name="sensor_offset_y" value="${t265_depth/2 - glass_to_front - zero_depth_to_glass}" />
+    <xacro:property name="fisheye1_offset_y" value="${t265_width/2 - 0.0127}" />
+    <xacro:property name="fisheye2_offset_y" value="${t265_width/2 - 0.0762}" />
+    <xacro:property name="pose_offset_y" value="${(fisheye1_offset_y+fisheye2_offset_y)/2}" />
+    <xacro:property name="sensor_offset_x" value="${t265_depth/2 - glass_to_front - zero_depth_to_glass}" />
 
     <link name="sensor_t265">
       <visual>
         <geometry>
-          <box size="${t265_width} ${t265_depth} ${t265_height}"/>
+          <box size="${t265_depth} ${t265_width} ${t265_height}"/>
         </geometry>
         <material name="grey">
           <color rgba="0.752941176 0.752941176 0.752941176 1.0"/>
@@ -44,19 +44,19 @@ aluminum peripherial evaluation case.
     <joint name="fisheye1_joint" type="fixed">
       <parent link="sensor_t265"/>
       <child link="fisheye1"/>
-      <origin xyz="${fisheye1_offset_x} ${sensor_offset_y} 0.0" rpy="${-pi/2} 0.0 0.0"/>
+      <origin xyz="${sensor_offset_x} ${fisheye1_offset_y} 0.0" rpy="${-pi/2} 0.0 ${-pi/2}"/>
     </joint>
 
     <joint name="fisheye2_joint" type="fixed">
       <parent link="sensor_t265"/>
       <child link="fisheye2"/>
-      <origin xyz="${fisheye2_offset_x} ${sensor_offset_y} 0.0" rpy="${-pi/2} 0.0 0.0"/>
+      <origin xyz="${sensor_offset_x} ${fisheye2_offset_y} 0.0" rpy="${-pi/2} 0.0 ${-pi/2}"/>
     </joint>
   
     <joint name="pose_joint" type="fixed">
       <parent link="t265_pose_link"/>
       <child link="sensor_t265"/>
-      <origin xyz="0.0 ${pose_offset_x} 0.0" rpy="0.0 0.0 ${-pi/2}"/>
+      <origin xyz="0.0 ${-pose_offset_y} 0.0" rpy="0.0 0.0 0.0"/>
     </joint>
 
     <joint name="t265_joint" type="fixed">

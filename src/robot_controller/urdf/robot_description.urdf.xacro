@@ -18,7 +18,7 @@
   <xacro:macro name="robot_wheel" params="prefix number">
     <link name="${prefix}_wheel_${number}">
       <inertial>
-        <origin rpy="0.0 ${pi/2} 0.0"/>
+        <origin rpy="${pi/2} 0.0 0.0"/>
         <mass value="1"/>
         <cylinder_inertia m="1" r="${wheel_radius}" h="${wheel_width}"/>
         <inertia 
@@ -27,7 +27,7 @@
             izz="0.1"/>
       </inertial>
       <visual name="${prefix}_wheel_${number}_visual">
-        <origin rpy="0.0 ${pi/2} 0.0"/>
+        <origin rpy="${pi/2} 0.0 0.0"/>
         <geometry>
           <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
         </geometry>
@@ -36,7 +36,7 @@
         </material>
       </visual>
       <collision>
-        <origin rpy="0.0 ${pi/2} 0.0"/>
+        <origin rpy="${pi/2} 0.0 0.0"/>
         <geometry>
           <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
         </geometry>
@@ -49,8 +49,8 @@
     <joint name="${prefix}_wheel_${number}_joint" type="continuous">
       <parent link="body"/>
       <child link="${prefix}_wheel_${number}"/>
-      <axis xyz="1.0 0.0 0.0" rpy="0 0 0"/>
-      <origin xyz="${((robot_width/2) - (wheel_width/2))*reflect} ${(wheelbase/2 - wheel_radius)*(number-2)*-1} ${wheel_radius - (robot_height - body_height/2)}"/>
+      <axis xyz="0.0 1.0 0.0" rpy="0 0 0"/>
+      <origin xyz="${(wheelbase/2 - wheel_radius)*(number-2)*-1} ${((robot_width/2) - (wheel_width/2))*reflect} ${wheel_radius - (robot_height - body_height/2)}"/>
     </joint>
   </xacro:macro>
 
@@ -60,7 +60,7 @@
   <link name="body">
     <visual name="body_visual">
       <geometry>  
-        <box size="${body_width} ${body_length} ${body_height}"/>
+        <box size="${body_length} ${body_width} ${body_height}"/>
       </geometry>
     </visual>
     <inertial>
@@ -72,7 +72,7 @@
     </inertial>
     <collision>
       <geometry>  
-        <box size="${body_width} ${body_length} ${body_height}"/>
+        <box size="${body_length} ${body_width} ${body_height}"/>
       </geometry>
     </collision>
   </link>
@@ -86,16 +86,16 @@
   <joint name="wheel_odom_joint" type="fixed">
     <parent link="base_link"/>
     <child link="wheel_odom_link"/>
-    <origin xyz="0.0 0.0 ${wheel_radius}" rpy="0.0 0.0 ${pi/2}"/>
+    <origin xyz="0.0 0.0 ${wheel_radius}" rpy="0.0 0.0 0.0"/>
   </joint>
   
   <!--Create all the wheels and define all the wheel joints-->
-  <xacro:wheel_joint prefix="left" reflect="-1" number="1"/>
-  <xacro:wheel_joint prefix="left" reflect="-1" number="2"/>
-  <xacro:wheel_joint prefix="left" reflect="-1" number="3"/>
-  <xacro:wheel_joint prefix="right" reflect="1" number="1"/>
-  <xacro:wheel_joint prefix="right" reflect="1" number="2"/>
-  <xacro:wheel_joint prefix="right" reflect="1" number="3"/>
+  <xacro:wheel_joint prefix="left" reflect="1" number="1"/>
+  <xacro:wheel_joint prefix="left" reflect="1" number="2"/>
+  <xacro:wheel_joint prefix="left" reflect="1" number="3"/>
+  <xacro:wheel_joint prefix="right" reflect="-1" number="1"/>
+  <xacro:wheel_joint prefix="right" reflect="-1" number="2"/>
+  <xacro:wheel_joint prefix="right" reflect="-1" number="3"/>
 
   <!--Import the 435 model-->
   <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro"/>
@@ -108,12 +108,12 @@
   <!-- see datasheet Revision 007, Fig. 4-4 page 65 -->
   <xacro:property name="zero_depth_to_glass" value="4.2e-3"/>
   <!-- convenience precomputation to avoid clutter-->
-  <xacro:property name="d435_offset_y" value="${d435_cam_mount_from_center_offset-glass_to_front-zero_depth_to_glass}"/>
-  <xacro:property name="offset_435_x" value="${body_width/2 - 0.2032}"/>
+  <xacro:property name="d435_offset_x" value="${d435_cam_mount_from_center_offset-glass_to_front-zero_depth_to_glass}"/>
+  <xacro:property name="offset_435_y" value="${body_width/2 - 0.2032}"/>
   <xacro:property name="mount_offset_435" value="0.0111125"/>
 
   <xacro:sensor_d435 parent="body">
-    <origin xyz="${offset_435_x} ${body_length/2 + d435_offset_y + mount_offset_435} ${body_height/2 - 0.0254}" rpy="0 0 ${pi/2}"/>
+    <origin xyz="${body_length/2 + d435_offset_x + mount_offset_435} ${offset_435_y} ${body_height/2 - 0.0254}" rpy="0 0 0"/>
   </xacro:sensor_d435>
 
   <!--Import the 265 model-->
@@ -123,7 +123,7 @@
   <xacro:property name="t265_height" value="0.0254" />
   
   <xacro:sensor_t265 child="body">
-    <origin xyz="${body_width/2 - (t265_width/2 + 0.1571625)} ${-(body_length/2 + t265_depth/2 + 0.0238125)} ${-body_height/2 + t265_height/2 + 0.0301625}" rpy="0.0 0.0 0.0"/>
+    <origin xyz="${-(body_length/2 + t265_depth/2 + 0.0238125)} ${-body_width/2 + 0.1571625 + t265_width/2} ${-body_height/2 + t265_height/2 + 0.0301625}" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_t265>
 
 </robot>
