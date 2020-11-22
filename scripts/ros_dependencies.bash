@@ -12,3 +12,4 @@ sudo apt install ros-${ROS_DISTRO}-joy -y
 sudo apt install ros-${ROS_DISTRO}-ddynamic-reconfigure -y
 sudo apt install ros-${ROS_DISTRO}-rtabmap-ros -y
 sudo apt install ros-${ROS_DISTRO}-depthimage-to-laserscan -y
+sudo apt install ros-${ROS_DISTRO}-move-base
