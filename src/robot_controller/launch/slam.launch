@@ -1,7 +1,7 @@
 <launch>
 
   <arg name="localization" default="false"/>
-  <param name="localization" value="$(arg localization)"
+  <param name="localization" value="$(arg localization)"/>
   <arg     if="$(param localization)" name="args"  default=""/>
   <arg unless="$(param localization)" name="args"  default="--delete_db_on_start"/>
 
