@@ -1,6 +1,8 @@
 <launch>
 
   <!-- start the robot nodes -->
-  <include file="$(find robot_controller)/launch/slam.launch" localization="true"/>
+  <include file="$(find robot_controller)/launch/slam.launch">
+    <arg name="localization" value="true"/>
+  </include>
 
 </launch>
