@@ -22,6 +22,7 @@
   <group ns="rtabmap">
     <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="$(arg args)">
       <param name="frame_id" type="string" value="base_link"/>
+      <param name="odom_frame_id" type="string" value="t265_odom_frame"/>
 
       <param name="subscribe_depth" type="bool" value="true"/>
       <param name="subscribe_scan" type="bool" value="true"/>
