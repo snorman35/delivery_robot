@@ -1,9 +1,8 @@
 <launch>
 
   <arg name="localization" default="false"/>
-  <param name="localization" value="$(arg localization)"/>
-  <arg     if="$(param localization)" name="args"  default=""/>
-  <arg unless="$(param localization)" name="args"  default="--delete_db_on_start"/>
+  <arg     if="$(arg localization)" name="args"  default=""/>
+  <arg unless="$(arg localization)" name="args"  default="--delete_db_on_start"/>
 
   <!-- start the robot nodes -->
   <include file="$(find robot_controller)/launch/run_robot.launch"/>
@@ -48,9 +47,9 @@
       <param name="SURF/GpuVersion"         value="true"/>
 
       <!-- localization mode -->
-      <param     if="$(param localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
-      <param unless="$(param localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
-      <param name="Mem/InitWMWithAllNodes" type="string" value="$(param localization)"/> 
+      <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
+      <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
+      <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
       
     </node>
   </group>
