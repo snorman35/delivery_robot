@@ -1,3 +1,5 @@
 deb package of librealsense seems to be working so far vs source (need dev packages)
 
 before catkin_make make sure ros-melodic-ddynamic_reconfigure is installed
+
+Possible simulator for 265 https://github.com/nilseuropa/realsense_ros_gazebo

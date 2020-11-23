@@ -1,0 +1,10 @@
+<launch>
+
+  <!-- start the robot nodes -->
+  <node name="move_base" pkg="move_base" type="move_base">
+    <remap from="/map" to="rtabmap/grid_map"/>
+    <remap from="odom" to="/t265/odom/sample"/>
+    <remap from="cmd_vel" to="/roboclaw/cmd_vel"/>
+  </node>
+
+</launch>
