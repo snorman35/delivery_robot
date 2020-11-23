@@ -13,4 +13,4 @@ sudo apt install ros-${ROS_DISTRO}-ddynamic-reconfigure -y
 sudo apt install ros-${ROS_DISTRO}-rtabmap-ros -y
 sudo apt install ros-${ROS_DISTRO}-depthimage-to-laserscan -y
 sudo apt install ros-${ROS_DISTRO}-move-base -y
-sudo apt install ros-${ROS_DISTRO}-dwa_local_planner -y
+sudo apt install ros-${ROS_DISTRO}-dwa-local-planner -y
