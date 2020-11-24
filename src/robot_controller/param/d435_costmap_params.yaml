@@ -3,7 +3,7 @@ global_costmap:
   obstacle_layer:
     scan:
       data_type: LaserScan
-      topic: scan
+      topic: depthscan
       marking: true
       clearing: true
       min_obstacle_height: 0.05 # previous: 0.25, too high for the R200 configuration!
@@ -14,7 +14,7 @@ local_costmap:
   obstacle_layer:
     scan:
       data_type: LaserScan
-      topic: scan
+      topic: depthscan
       marking: true
       clearing: true
       min_obstacle_height: 0.05 # previous: 0.25, too high for the R200 configuration!

@@ -17,6 +17,7 @@
     <rosparam file="$(find robot_controller)/param/move_base_params.yaml" command="load" />
     <rosparam file="$(find robot_controller)/param/global_planner_params.yaml" command="load" />
     <rosparam file="$(find robot_controller)/param/navfn_global_planner_params.yaml" command="load" />
+    <rosparam file="$(find robot_controller)/param/d435_costmap_params.yaml" command="load" />
     
     <!-- reset frame_id parameters using user input data -->
     <param name="global_costmap/global_frame" value="$(arg global_frame_id)"/>
