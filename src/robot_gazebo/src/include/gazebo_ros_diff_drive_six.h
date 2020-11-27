@@ -29,7 +29,7 @@
 /*
  * \file  gazebo_ros_diff_drive.h
  *
- * \brief A differential drive plugin for gazebo. Based on the diffdrive plugin 
+ * \brief A differential drive plugin for gazebo. Based on the diffdrive plugin
  * developed for the erratic robot (see copyright notice above). The original
  * plugin can be found in the ROS package gazebo_erratic_plugins.
  *
@@ -90,7 +90,7 @@ namespace gazebo {
     private:
       void publishOdometry(double step_time);
       void getWheelVelocities();
-      void publishWheelTF(); 
+      void publishWheelTF(); /// publishes the wheel tf's
       void publishWheelJointState();
       void UpdateOdometryEncoder();
 
@@ -103,7 +103,7 @@ namespace gazebo {
       double wheel_diameter_;
       double wheel_torque;
       double wheel_speed_[2];
-          double wheel_accel;
+	  double wheel_accel;
       double wheel_speed_instr_[2];
 
       std::vector<physics::JointPtr> joints_;
@@ -113,7 +113,7 @@ namespace gazebo {
       ros::Subscriber cmd_vel_subscriber_;
       boost::shared_ptr<tf::TransformBroadcaster> transform_broadcaster_;
       sensor_msgs::JointState joint_state_;
-      ros::Publisher joint_state_publisher_;      
+      ros::Publisher joint_state_publisher_;
       nav_msgs::Odometry odom_;
       std::string tf_prefix_;
 
@@ -142,13 +142,14 @@ namespace gazebo {
       double update_rate_;
       double update_period_;
       common::Time last_update_time_;
-      
+
       OdomSource odom_source_;
       geometry_msgs::Pose2D pose_encoder_;
       common::Time last_odom_update_;
-      
+
     // Flags
     bool publishWheelTF_;
+    bool publishOdomTF_;
     bool publishWheelJointState_;
 
   };
