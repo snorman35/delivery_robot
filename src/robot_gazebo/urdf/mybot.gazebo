@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<robot>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
 
   <gazebo>
     <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
@@ -27,4 +27,5 @@
     <material>Gazebo/Orange</material>
   </gazebo>
 
+  <xacro:include filename="$(find robot_controller)/urdf/robot_description.urdf.xacro"/>
 </robot>
