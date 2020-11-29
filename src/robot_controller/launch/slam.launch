@@ -42,10 +42,16 @@
       <!-- RTAB-Map's parameters -->
       <param name="Mem/UseOdomGravity"      value="true"/>
       <param name="Optimizer/GravitySigma"  value="0.3"/>
+
       <!-- Enable GPU acceleration-->
       <param name="FAST/Gpu"                value="true"/>
       <param name="ORB/Gpu"                 value="true"/>
       <param name="SURF/GpuVersion"         value="true"/>
+
+      <!-- localization mode -->
+      <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
+      <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
+      <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
       
     </node>
   </group>
