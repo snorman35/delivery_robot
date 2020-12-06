@@ -85,16 +85,18 @@ namespace gazebo {
       event::ConnectionPtr update_connection_;
 
       std::string left_front_joint_name_;
-      std::string right_front_joint_name_;
+      std::string left_middle_joint_name_;
       std::string left_rear_joint_name_;
+      std::string right_front_joint_name_;
+      std::string right_middle_joint_name_;
       std::string right_rear_joint_name_;
 
       double wheel_separation_;
       double wheel_diameter_;
       double torque;
-      double wheel_speed_[4];
+      double wheel_speed_[6];
 
-      physics::JointPtr joints[4];
+      physics::JointPtr joints[6];
 
       // ROS STUFF
       ros::NodeHandle* rosnode_;

@@ -112,6 +112,7 @@ catkin_package(
   gazebo_ros_diff_drive_f
   gazebo_ros_tricycle_drive
   gazebo_ros_skid_steer_drive
+  gazebo_ros_skid_steer_six
   gazebo_ros_video
   gazebo_ros_planar_move
   gazebo_ros_range
@@ -275,6 +276,9 @@ target_link_libraries(gazebo_ros_tricycle_drive gazebo_ros_utils ${Boost_LIBRARI
 add_library(gazebo_ros_skid_steer_drive src/gazebo_ros_skid_steer_drive.cpp)
 target_link_libraries(gazebo_ros_skid_steer_drive ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
+add_library(gazebo_ros_skid_steer_six src/gazebo_ros_skid_steer_six.cpp)
+target_link_libraries(gazebo_ros_skid_steer_six ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+
 add_library(gazebo_ros_video src/gazebo_ros_video.cpp)
 target_link_libraries(gazebo_ros_video ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${OGRE_LIBRARIES})
 
@@ -336,6 +340,7 @@ install(TARGETS
   gazebo_ros_diff_drive_f
   gazebo_ros_tricycle_drive
   gazebo_ros_skid_steer_drive
+  gazebo_ros_skid_steer_six
   gazebo_ros_video
   gazebo_ros_planar_move
   gazebo_ros_vacuum_gripper
