@@ -3,16 +3,16 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
   <gazebo>
-    <plugin name="gazebo_ros_diff_drive_f" filename="libgazebo_ros_diff_drive_f.so">
+    <plugin name="gazebo_ros_skid_steer_drive" filename="libgazebo_ros_skid_steer_drive.so">
       <legacyMode>false</legacyMode>
       <alwaysOn>true</alwaysOn>
       <updateRate>20</updateRate>
-      <leftJoint>left_wheel_1_joint</leftJoint>
-      <leftJoint>left_wheel_2_joint</leftJoint>
-      <leftJoint>left_wheel_3_joint</leftJoint>
-      <rightJoint>right_wheel_1_joint</rightJoint>
-      <rightJoint>right_wheel_2_joint</rightJoint>
-      <rightJoint>right_wheel_3_joint</rightJoint>
+      <leftFrontJoint>left_wheel_1_joint</leftFrontJoint>
+      <leftMiddleJoint>left_wheel_2_joint</leftMiddleJoint>
+      <leftRearJoint>left_wheel_3_joint</leftRearJoint>
+      <rightFrontJoint>right_wheel_1_joint</rightFrontJoint>
+      <rightMiddleJoint>right_wheel_2_joint</rightMiddleJoint>
+      <rightRearJoint>right_wheel_3_joint</rightRearJoint>
       <wheelSeparation>0.5842</wheelSeparation>
       <wheelDiameter>0.13335</wheelDiameter>
       <wheelTorque>50</wheelTorque>
