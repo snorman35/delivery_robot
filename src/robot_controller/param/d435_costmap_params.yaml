@@ -6,8 +6,8 @@ global_costmap:
       topic: depthscan
       marking: true
       clearing: true
-      min_obstacle_height: 0.05 # previous: 0.25, too high for the R200 configuration!
-      max_obstacle_height: 0.35
+      min_obstacle_height: 0 # previous: 0.25, too high for the R200 configuration!
+      max_obstacle_height: 0
 
 local_costmap:
   robot_radius: 0.1  # distance a circular robot should be clear of the obstacle (kobuki: 0.18)
@@ -17,8 +17,8 @@ local_costmap:
       topic: depthscan
       marking: true
       clearing: true
-      min_obstacle_height: 0.05 # previous: 0.25, too high for the R200 configuration!
-      max_obstacle_height: 0.35
+      min_obstacle_height: 0 # previous: 0.25, too high for the R200 configuration!
+      max_obstacle_height: 0
 
 
 

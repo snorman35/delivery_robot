@@ -1,0 +1,8 @@
+<launch>
+
+  <!-- start the robot nodes -->
+  <include file="$(find robot_gazebo)/launch/slam.launch">
+    <arg name="localization" value="false"/>
+  </include>
+
+</launch>

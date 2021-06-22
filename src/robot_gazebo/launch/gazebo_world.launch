@@ -7,6 +7,11 @@
     <arg name="gui" default="true"/>
     <arg name="headless" default="false"/>
     <arg name="debug" default="false"/>
+    <arg name="model" default="$(find robot_gazebo)/urdf/mybot.gazebo"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" default="$(find robot_gazebo)/worlds/willow_garage.world"/>
@@ -17,7 +22,6 @@
         <arg name="debug" default="$(arg debug)"/>
     </include>
 
-    <param name="robot_description" command="$(find xacro)/xacro '$(find robot_gazebo)/urdf/mybot.gazebo'" />
 
     <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model mybot" />
 </launch>

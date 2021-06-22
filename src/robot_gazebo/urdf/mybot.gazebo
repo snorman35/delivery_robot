@@ -1,6 +1,21 @@
 <?xml version="1.0"?>
 
-<robot xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="mybot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find robot_controller)/urdf/robot_description.urdf.xacro"/>
+  <xacro:include filename="$(find robot_gazebo)/xacro/depthcam.xacro"/>
+
+  <xacro:realsense_d435 sensor_name="d435" parent_link="camera_link" rate="10">
+    <origin rpy="0 0 0 " xyz="0.01 0 0"/>
+  </xacro:realsense_d435>
+
+  <link name="gazebo_base"/>
+  
+  <joint name="gazebo_joint" type="fixed">
+    <origin xyz="0.282 -0.001 0.181"/>
+    <parent link="gazebo_base"/>
+    <child link="t265_pose_link"/>
+  </joint>
 
   <gazebo>
     <plugin name="gazebo_ros_skid_steer_six" filename="libgazebo_ros_skid_steer_six.so">
@@ -19,7 +34,8 @@
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <robotBaseFrame>body</robotBaseFrame>
+      <robotBaseFrame>gazebo_base</robotBaseFrame>
+      <broadcastTF>true</broadcastTF>
     </plugin>
   </gazebo>
 
@@ -27,5 +43,5 @@
     <material>Gazebo/Orange</material>
   </gazebo>
 
-  <xacro:include filename="$(find robot_controller)/urdf/robot_description.urdf.xacro"/>
+  
 </robot>
